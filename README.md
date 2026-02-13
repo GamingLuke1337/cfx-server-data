@@ -7,6 +7,8 @@ Many "vulnerability" security issues have been fixed
 now due to obsolete dependencies, the original code is available at the following link:
 [cfx-server-data](https://github.com/citizenfx/cfx-server-data).
 
+I added linting to this branch to test the changes I've made.
+
 ## Policy
 You can make pull requests to propose changes that benefit _everyone_. Add new useful resources, change/improve
 existing ones - anything goes, as long as you make sure to:
