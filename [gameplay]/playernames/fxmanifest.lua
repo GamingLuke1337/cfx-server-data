@@ -15,5 +15,5 @@ client_script 'client.lua'
 server_script 'server.lua'
 
 files {
-    'templates/*.lua'
+    'template/template.lua'
 }

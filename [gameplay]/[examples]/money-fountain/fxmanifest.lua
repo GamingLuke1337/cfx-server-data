@@ -9,11 +9,8 @@ author 'Cfx.re <root@cfx.re>'
 description 'An example money system client containing a money fountain.'
 repository 'https://github.com/bitpredator/cfx-server-data'
 
-shared_script "shared/main.lua"
-client_script "client/main.lua"
-server_script "server/main.lua"
+shared_script 'shared/main.lua'
+client_script 'client/main.lua'
+server_script 'server/main.lua'
 
-dependencies {
-    "mapmanager",
-    "money"
-}
+dependency 'money'
