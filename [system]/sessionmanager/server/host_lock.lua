@@ -1,14 +1,10 @@
--- whitelist c2s events
-RegisterServerEvent("hostingSession")
-RegisterServerEvent("hostedSession")
-
 -- event handler for pre-session 'acquire'
-local currentHosting, source
+local currentHosting
 local hostReleaseCallbacks = {}
 
 -- TODO: add a timeout for the hosting lock to be held
 -- TODO: add checks for 'fraudulent' conflict cases of hosting attempts (typically whenever the host can not be reached)
-AddEventHandler("hostingSession", function()
+RegisterServerEvent("hostedSession", function(source)
     -- if the lock is currently held, tell the client to await further instruction
     if currentHosting then
         TriggerClientEvent("sessionHostResult", source, "wait")
@@ -50,7 +46,7 @@ AddEventHandler("hostingSession", function()
     end)
 end)
 
-AddEventHandler("hostedSession", function()
+RegisterServerEvent("hostedSession", function(source)
     -- check if the client is the original locker
     if currentHosting ~= source then
         -- TODO: drop client as they're clearly lying

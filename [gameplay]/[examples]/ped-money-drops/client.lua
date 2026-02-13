@@ -4,7 +4,6 @@ AddEventHandler("gameEventTriggered", function(eventName, args)
     end
 
     local victim = args[1]
-    local culprit = args[2]
     local isDead = args[4] == 1
 
     if not isDead or not DoesEntityExist(victim) then
