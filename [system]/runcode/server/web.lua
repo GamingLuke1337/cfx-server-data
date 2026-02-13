@@ -50,7 +50,7 @@ local function handleRunCode(data, res)
     end
 end
 
-RegisterNetEvent("runcode:runInBand", function(id, data)
+RegisterNetEvent("runcode:runInBand", function(id, data, source)
     local s = source
     local privs = GetPrivs(s)
 
