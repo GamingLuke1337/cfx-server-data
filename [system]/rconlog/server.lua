@@ -96,7 +96,7 @@ AddEventHandler("rconCommand", function(commandName, args)
             local guid = GetPlayerIdentifiers(netid)
             if guid and guid[1] and data then
                 local ping = GetPlayerPing(netid)
-                RconPrint(netid .. " " .. guid[1] .. " " .. data.name .. " " .. GetPlayerEP(netid) .. " " .. ping .. "\n")
+                RconPrint(netid .. " " .. guid[1] .. " " .. data.name .. " " .. GetPlayerEndpoint(netid) .. " " .. ping .. "\n")
             end
         end
         CancelEvent()

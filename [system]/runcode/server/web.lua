@@ -151,7 +151,6 @@ CreateThread(function()
 
         for k, v in ipairs(codes) do
             if GetGameTimer() > v.timeout then
-                source = nil
                 returnCode(k, "", "Timed out waiting on the target client.")
             end
         end

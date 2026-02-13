@@ -1,4 +1,3 @@
-local RconLog
 RegisterNetEvent('baseevents:onPlayerWasted')
 RegisterNetEvent('baseevents:enteringVehicle')
 RegisterNetEvent('baseevents:enteringAborted')
