@@ -1,7 +1,8 @@
 AddEventHandler('onClientMapStart', function()
     CreateThread(function()
-        -- Wait a moment for safety
-        Wait(500)
+        while GetResourceState('spawnmanager') ~= 'started' do
+            Wait(0)
+        end
 
         exports.spawnmanager:setAutoSpawn(true)
         exports.spawnmanager:forceRespawn()
