@@ -59,7 +59,7 @@ AddEventHandler('getMapDirectives', function(add)
 
                 -- recalculate the model for storage
                 if not tonumber(model) then
-                    model = GetHashKey(model, _r)
+                    model = GetHashKey(model)
                 end
 
                 -- store the spawn data in the state so we can erase it later on
@@ -287,11 +287,6 @@ function spawnPlayer(spawnIdx, cb)
 
             -- release the player model
             SetModelAsNoLongerNeeded(spawn.model)
-
-            -- RDR3 player model bits
-            if N_0x283978a15512b2fe then
-				N_0x283978a15512b2fe(PlayerPedId(), true)
-            end
         end
 
         -- preload collisions for the spawnpoint

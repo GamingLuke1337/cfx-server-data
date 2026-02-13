@@ -1,56 +1,65 @@
-local currentHosting = nil
+-- event handler for pre-session 'acquire'
+local currentHosting
 local hostReleaseCallbacks = {}
 
-RegisterNetEvent('hostedSession:acquire', function()
-    local src = source
-
+-- TODO: add a timeout for the hosting lock to be held
+-- TODO: add checks for 'fraudulent' conflict cases of hosting attempts (typically whenever the host can not be reached)
+RegisterServerEvent("hostedSession", function(source)
+    -- if the lock is currently held, tell the client to await further instruction
     if currentHosting then
-        TriggerClientEvent('sessionHostResult', src, 'wait')
+        TriggerClientEvent("sessionHostResult", source, "wait")
 
-        hostReleaseCallbacks[#hostReleaseCallbacks + 1] = function()
-            TriggerClientEvent('sessionHostResult', src, 'free')
+        -- register a callback for when the lock is freed
+        table.insert(hostReleaseCallbacks, function()
+            TriggerClientEvent("sessionHostResult", source, "free")
+        end)
+
+        return
+    end
+
+    -- if the current host was last contacted less than a second ago
+    if GetHostId() then
+        if GetPlayerLastMsg(GetHostId()) < 1000 then
+            TriggerClientEvent("sessionHostResult", source, "conflict")
+
+            return
         end
-
-        return
     end
 
-    -- Optional advisory conflict check
-    local hostId = GetHostId and GetHostId() or nil
-    if hostId and GetPlayerLastMsg(hostId) < 1000 then
-        TriggerClientEvent('sessionHostResult', src, 'conflict')
-        return
-    end
-
-    currentHosting = src
     hostReleaseCallbacks = {}
 
-    TriggerClientEvent('sessionHostResult', src, 'go')
+    currentHosting = source
 
+    TriggerClientEvent("sessionHostResult", source, "go")
+
+    -- set a timeout of 5 seconds
     SetTimeout(5000, function()
-        if currentHosting ~= src then
-            return -- lock was released or taken by someone else
+        if not currentHosting then
+            return
         end
 
         currentHosting = nil
 
-        for _, cb in ipairs(hostReleaseCallbacks) do cb() end
-        hostReleaseCallbacks = {}
+        for _, cb in ipairs(hostReleaseCallbacks) do
+            cb()
+        end
     end)
 end)
 
-RegisterNetEvent('hostedSession:release', function()
-    local src = source
-
-    if currentHosting ~= src then
-        -- this is either a bug or a malicious client
-        print(('hostedSession:release mismatch: current=%s src=%s'):format(tostring(currentHosting), tostring(src)))
-        -- DropPlayer(src, 'Invalid host release') -- if you want strict enforcement
+RegisterServerEvent("hostedSession", function(source)
+    -- check if the client is the original locker
+    if currentHosting ~= source then
+        -- TODO: drop client as they're clearly lying
+        print(currentHosting, "~=", source)
         return
     end
 
+    -- free the host lock (call callbacks and remove the lock value)
+    for _, cb in ipairs(hostReleaseCallbacks) do
+        cb()
+    end
+
     currentHosting = nil
-    for _, cb in ipairs(hostReleaseCallbacks) do cb() end
-    hostReleaseCallbacks = {}
 end)
 
 EnableEnhancedHostSupport(true)
