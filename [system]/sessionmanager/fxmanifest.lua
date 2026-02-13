@@ -1,13 +1,13 @@
 -- This resource is part of the default Cfx.re asset pack (cfx-server-data)
 -- Altering or recreating for local use only is strongly discouraged.
 
+fx_version 'cerulean'
+game 'gta5'
+
 version '2.0.1'
 author 'Cfx.re <root@cfx.re>'
 description 'Handles the "host lock" for non-OneSync servers. Do not disable.'
 repository 'https://github.com/bitpredator/cfx-server-data'
-
-fx_version 'cerulean'
-games { 'gta4', 'gta5' }
 
 server_script 'server/host_lock.lua'
 client_script 'client/empty.lua'
