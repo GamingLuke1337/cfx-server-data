@@ -1,25 +1,36 @@
 -- This resource is part of the default Cfx.re asset pack (cfx-server-data)
 -- Altering or recreating for local use only is strongly discouraged.
 
+<<<<<<< Updated upstream
 version("2.0.1")
 author("Cfx.re <root@cfx.re>")
 description(
 "Allows server owners to execute arbitrary server-side or client-side JavaScript/Lua code. *Consider only using this on development servers.")
 repository("https://github.com/bitpredator/cfx-server-data")
+=======
+fx_version 'cerulean'
+game 'common'
+>>>>>>> Stashed changes
 
-game("common")
-fx_version("bodacious")
+version '2.0.1'
+author 'Cfx.re <root@cfx.re>'
+description 'Allows server owners to execute arbitrary server-side or client-side JavaScript/Lua code. *Consider only using this on development servers.'
+repository 'https://github.com/bitpredator/cfx-server-data'
 
-client_script("runcode_cl.lua")
-server_script("runcode_sv.lua")
-server_script("runcode_web.lua")
+ui_page 'web/nui.html'
 
-shared_script("runcode_shared.lua")
-shared_script("runcode.js")
+file 'web/nui.html'
 
-client_script("runcode_ui.lua")
+client_script 'client/main.lua'
 
-ui_page("web/nui.html")
-files({
-    "web/nui.html",
-})
+server_scripts {
+    'server/main.lua',
+    'server/web.lua'
+}
+
+shared_scripts {
+    'shared/main.lua',
+    'shared/runcode.js'
+}
+
+client_script 'client/ui.lua'

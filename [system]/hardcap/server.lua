@@ -1,9 +1,7 @@
 local playerCount = 0
 local list = {}
 
-RegisterServerEvent("hardcap:playerActivated")
-
-AddEventHandler("hardcap:playerActivated", function()
+RegisterNetEvent("hardcap:playerActivated", function()
 	if not list[source] then
 		playerCount = playerCount + 1
 		list[source] = true

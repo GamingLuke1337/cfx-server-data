@@ -4,19 +4,19 @@ local sentState = {}
 -- Money system export
 local moneySystem = exports["money"]
 
--- Recupera la quantità di denaro in una fontana
+-- Retrieve the amount of money in a fountain
 local function getMoneyForFountain(fountainId)
     return GetResourceKvpInt(("money:%s"):format(fountainId)) / 100.0
 end
 
--- Imposta la quantità di denaro in una fontana e aggiorna GlobalState
+-- Set the amount of money in a fountain and update GlobalState
 local function setMoneyForFountain(fountainId, amount)
     local intAmount = math.tointeger(amount * 100.0)
     GlobalState["fountain_" .. fountainId] = intAmount
     return SetResourceKvpInt(("money:%s"):format(fountainId), intAmount)
 end
 
--- Trova una fontana vicina a un giocatore specifico
+-- Find a nearby fountain for a specific player
 local function getNearbyFountain(fountainId, source)
     local playerCoords = GetEntityCoords(GetPlayerPed(source))
 
@@ -29,7 +29,7 @@ local function getNearbyFountain(fountainId, source)
     return nil
 end
 
--- Funzione generica per raccogliere o depositare denaro nella fontana
+-- Generic function to collect or deposit money in the fountain
 local function processFountainInteraction(source, fountainId, isPickup)
     local fountain = getNearbyFountain(fountainId, source)
     if not fountain then
@@ -52,13 +52,13 @@ local function processFountainInteraction(source, fountainId, isPickup)
         if fountainMoney >= amount then
             success = moneySystem:addMoney(source, "cash", amount)
             if success then
-                fountainMoney -= amount
+                fountainMoney = fountainMoney - amount
             end
         end
     else
         success = moneySystem:removeMoney(source, "cash", amount)
         if success then
-            fountainMoney += amount
+            fountainMoney = fountainMoney + amount
         end
     end
 
@@ -68,17 +68,17 @@ local function processFountainInteraction(source, fountainId, isPickup)
     end
 end
 
--- Evento: preleva denaro dalla fontana
+-- Event: try to pick up money from the fountain
 RegisterNetEvent("money_fountain:tryPickup", function(fountainId)
     processFountainInteraction(source, fountainId, true)
 end)
 
--- Evento: deposita denaro nella fontana
+-- Event: try to place money in the fountain
 RegisterNetEvent("money_fountain:tryPlace", function(fountainId)
     processFountainInteraction(source, fountainId, false)
 end)
 
--- Thread per sincronizzare lo stato delle fontane non ancora inviate
+-- Thread to synchronize the state of fountains not yet sent
 CreateThread(function()
     while true do
         Wait(500)

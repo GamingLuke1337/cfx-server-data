@@ -1,4 +1,4 @@
--- SHARED SCRIPT: Money Fountain Registry
+-- Money Fountain Registry
 
 moneyFountains = {}
 local nextFountainIndex = 1
@@ -16,7 +16,7 @@ AddEventHandler("getMapDirectives", function(add)
             end
 
             local index = nextFountainIndex
-            nextFountainIndex += 1
+            nextFountainIndex = nextFountainIndex + 1
 
             moneyFountains[index] = {
                 id = name,

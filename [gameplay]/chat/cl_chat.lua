@@ -4,23 +4,12 @@ local chatInputActive = false
 local chatInputActivating = false
 local chatLoaded = false
 
-RegisterNetEvent('chatMessage')
-RegisterNetEvent('chat:addTemplate')
-RegisterNetEvent('chat:addMessage')
-RegisterNetEvent('chat:addSuggestion')
-RegisterNetEvent('chat:addSuggestions')
-RegisterNetEvent('chat:addMode')
-RegisterNetEvent('chat:removeMode')
-RegisterNetEvent('chat:removeSuggestion')
-RegisterNetEvent('chat:clear')
-
 -- internal events
-RegisterNetEvent('__cfx_internal:serverPrint')
 
 RegisterNetEvent('_chat:messageEntered')
 
 --deprecated, use chat:addMessage
-AddEventHandler('chatMessage', function(author, color, text)
+RegisterNetEvent('chatMessage', function(author, color, text)
   local args = { text }
   if author ~= "" then
     table.insert(args, 1, author)
@@ -35,7 +24,7 @@ AddEventHandler('chatMessage', function(author, color, text)
   })
 end)
 
-AddEventHandler('__cfx_internal:serverPrint', function(msg)
+RegisterNetEvent('__cfx_internal:serverPrint', function(msg)
   print(msg)
 
   SendNUIMessage({
@@ -64,7 +53,7 @@ local addMessage = function(message)
 end
 
 exports('addMessage', addMessage)
-AddEventHandler('chat:addMessage', addMessage)
+RegisterNetEvent('chat:addMessage', addMessage)
 
 -- addSuggestion
 local addSuggestion = function(name, help, params)
@@ -78,8 +67,9 @@ local addSuggestion = function(name, help, params)
   })
 end
 
+
 exports('addSuggestion', addSuggestion)
-AddEventHandler('chat:addSuggestion', addSuggestion)
+RegisterNetEvent('chat:addSuggestion', addSuggestion)
 
 AddEventHandler('chat:addSuggestions', function(suggestions)
   for _, suggestion in ipairs(suggestions) do
@@ -90,28 +80,28 @@ AddEventHandler('chat:addSuggestions', function(suggestions)
   end
 end)
 
-AddEventHandler('chat:removeSuggestion', function(name)
+RegisterNetEvent('chat:removeSuggestion', function(name)
   SendNUIMessage({
     type = 'ON_SUGGESTION_REMOVE',
     name = name
   })
 end)
 
-AddEventHandler('chat:addMode', function(mode)
+RegisterNetEvent('chat:addMode', function(mode)
   SendNUIMessage({
     type = 'ON_MODE_ADD',
     mode = mode
   })
 end)
 
-AddEventHandler('chat:removeMode', function(name)
+RegisterNetEvent('chat:removeMode', function(name)
   SendNUIMessage({
     type = 'ON_MODE_REMOVE',
     name = name
   })
 end)
 
-AddEventHandler('chat:addTemplate', function(id, html)
+RegisterNetEvent('chat:addTemplate', function(id, html)
   SendNUIMessage({
     type = 'ON_TEMPLATE_ADD',
     template = {
@@ -121,7 +111,7 @@ AddEventHandler('chat:addTemplate', function(id, html)
   })
 end)
 
-AddEventHandler('chat:clear', function()
+RegisterNetEvent('chat:clear', function()
   SendNUIMessage({
     type = 'ON_CLEAR'
   })

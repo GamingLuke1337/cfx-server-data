@@ -1,13 +1,22 @@
 -- This resource is part of the default Cfx.re asset pack (cfx-server-data)
 -- Altering or recreating for local use only is strongly discouraged.
 
+<<<<<<< Updated upstream
 version '2.0.1'
 description 'A basic resource for storing player identifiers.'
 author 'Cfx.re <root@cfx.re>'
 repository 'https://github.com/bitpredator/cfx-server-data'
 
 fx_version 'bodacious'
+=======
+fx_version 'cerulean'
+>>>>>>> Stashed changes
 game 'common'
+
+version '2.0.1'
+author 'Cfx.re <root@cfx.re>'
+description 'A basic resource for storing player identifiers.'
+repository 'https://github.com/bitpredator/cfx-server-data'
 
 server_script 'server.lua'
 

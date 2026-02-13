@@ -33,7 +33,7 @@ CreateThread(function()
 
 				currentVehicle = GetVehiclePedIsUsing(ped)
 				currentSeat = GetPedVehicleSeat(ped)
-				
+
 				local model = GetEntityModel(currentVehicle)
 				local vehicleName = GetDisplayNameFromVehicleModel(model)
 				local netId = VehToNet(currentVehicle)
@@ -47,7 +47,7 @@ CreateThread(function()
 				local model = GetEntityModel(currentVehicle)
 				local vehicleName = GetDisplayNameFromVehicleModel(model)
 				local netId = VehToNet(currentVehicle)
-				
+
 				TriggerEvent('baseevents:leftVehicle', currentVehicle, currentSeat, model, vehicleName)
 				TriggerServerEvent('baseevents:leftVehicle', currentVehicle, currentSeat, model, vehicleName, netId)
 

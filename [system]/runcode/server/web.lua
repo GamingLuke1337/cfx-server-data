@@ -50,9 +50,7 @@ local function handleRunCode(data, res)
     end
 end
 
-RegisterNetEvent("runcode:runInBand")
-
-AddEventHandler("runcode:runInBand", function(id, data)
+RegisterNetEvent("runcode:runInBand", function(id, data)
     local s = source
     local privs = GetPrivs(s)
 
@@ -160,8 +158,7 @@ CreateThread(function()
     end
 end)
 
-RegisterNetEvent("runcode:gotResult")
-AddEventHandler("runcode:gotResult", returnCode)
+RegisterNetEvent("runcode:gotResult", returnCode)
 
 SetHttpHandler(function(req, res)
     local path = req.path

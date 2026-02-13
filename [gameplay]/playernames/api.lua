@@ -78,3 +78,10 @@ function formatPlayerNameTag(i, templateStr)
 
     return str
 end
+
+exports('setComponentColor', setComponentColor)
+exports('setComponentAlpha', setComponentAlpha)
+exports('setComponentVisibility', setComponentVisibility)
+exports('setWantedLevel', setWantedLevel)
+exports('setHealthBarColor', setHealthBarColor)
+exports('setNameTemplate', setNameTemplate)

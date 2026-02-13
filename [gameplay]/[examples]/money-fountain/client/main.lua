@@ -5,11 +5,6 @@ AddTextEntry("FOUNTAIN_HELP_BROKE", "This fountain currently contains $~1~.~n~Pr
 AddTextEntry("FOUNTAIN_HELP_BROKE_N_DRAINED", "This fountain currently contains $~1~.")
 AddTextEntry("FOUNTAIN_HELP_INUSE", "This fountain currently contains $~1~.~n~You can use it again in ~a~.")
 
--- Upvalue aliases
-local Wait = Wait
-local GetEntityCoords = GetEntityCoords
-local PlayerPedId = PlayerPedId
-
 -- Constants
 local INPUT_PICKUP = 38
 local INPUT_PLACE = 47

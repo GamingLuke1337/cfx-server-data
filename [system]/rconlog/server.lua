@@ -15,9 +15,7 @@ AddEventHandler("rlPlayerActivated", function()
     end
 end)
 
-RegisterServerEvent("rlUpdateNamesResult")
-
-AddEventHandler("rlUpdateNamesResult", function(res)
+RegisterServerEvent("rlUpdateNamesResult", function(res)
     if source ~= tonumber(GetHostId()) then
         print("bad guy")
         return

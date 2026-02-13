@@ -1,6 +1,12 @@
 -- This resource is part of the default Cfx.re asset pack (cfx-server-data)
 -- Altering or recreating for local use only is strongly discouraged.
 
+<<<<<<< Updated upstream
+=======
+fx_version 'cerulean'
+games {'gta5', 'rdr3'}
+
+>>>>>>> Stashed changes
 version '2.0.1'
 author 'Cfx.re <root@cfx.re>'
 description 'Provides baseline chat functionality using a NUI-based interface.'
@@ -18,9 +24,12 @@ files {
   'html/vendor/fonts/*.woff2',
 }
 
+<<<<<<< Updated upstream
 fx_version 'cerulean'
 games { 'gta5' }
 
+=======
+>>>>>>> Stashed changes
 dependencies {
   'yarn',
   'webpack'

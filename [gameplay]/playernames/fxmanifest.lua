@@ -1,36 +1,31 @@
 -- This resource is part of the default Cfx.re asset pack (cfx-server-data)
 -- Altering or recreating for local use only is strongly discouraged.
 
+<<<<<<< Updated upstream
+=======
+fx_version 'cerulean'
+game 'gta5'
+
+>>>>>>> Stashed changes
 version '2.0.1'
 author 'Cfx.re <root@cfx.re>'
 description 'A basic resource for displaying player names.'
 repository 'https://github.com/bitpredator/cfx-server-data'
 
--- add scripts
-client_script 'playernames_api.lua'
-server_script 'playernames_api.lua'
+shared_script 'api.lua'
 
-client_script 'playernames_cl.lua'
-server_script 'playernames_sv.lua'
+client_script 'client.lua'
+server_script 'server.lua'
 
--- make exports
-local exportList = {
-    'setComponentColor',
-    'setComponentAlpha',
-    'setComponentVisibility',
-    'setWantedLevel',
-    'setHealthBarColor',
-    'setNameTemplate'
-}
-
-exports(exportList)
-server_exports(exportList)
-
--- add files
 files {
+<<<<<<< Updated upstream
     'template/template.lua'
 }
 
 -- support the latest resource manifest
 fx_version 'cerulean'
 game 'gta5'
+=======
+    'templates/*.lua'
+}
+>>>>>>> Stashed changes

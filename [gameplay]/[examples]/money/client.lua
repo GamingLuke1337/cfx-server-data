@@ -1,6 +1,6 @@
 local moneyTypes = {
     cash = `MP0_WALLET_BALANCE`,
-    bank = `BANK_BALANCE`,
+    bank = `BANK_BALANCE`
 }
 
 RegisterNetEvent("money:displayUpdate", function(moneyType, amount)
@@ -12,12 +12,12 @@ RegisterNetEvent("money:displayUpdate", function(moneyType, amount)
     StatSetInt(stat, math.floor(amount), true)
 end)
 
--- Richiede al server la visualizzazione iniziale all'avvio
+-- Request initial display from the server on startup
 TriggerServerEvent("money:requestDisplay")
 
--- Mostra HUD GTA per contanti e banca se si preme Z (default GTA: INPUT_MULTIPLAYER_INFO)
+-- Show GTA HUD for cash and bank when pressing Z (default GTA: INPUT_MULTIPLAYER_INFO)
 CreateThread(function()
-    local displayKey = 20 -- INPUT_MULTIPLAYER_INFO (tasto Z)
+    local displayKey = 20 -- INPUT_MULTIPLAYER_INFO (key Z)
     while true do
         Wait(0)
         if IsControlJustPressed(0, displayKey) then

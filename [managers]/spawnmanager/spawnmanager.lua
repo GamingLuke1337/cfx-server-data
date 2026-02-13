@@ -5,6 +5,24 @@ local spawnPoints = {}
 local autoSpawnEnabled = false
 local autoSpawnCallback
 
+local function getHealthOverride()
+    local v = tostring(GetConvar("spawnmanager_sethealth", "false")):lower()
+
+    if v == "false" or v == "off" or v == "0" or v == "" then
+        return false
+    end
+
+    local n = tonumber(v)
+    if n then
+        return math.floor(n)
+    end
+
+    return false
+end
+
+local healthOverride = getHealthOverride()
+local removeWeapons = GetConvar("spawnmanager_removeweapons", true)
+
 -- support for mapmanager maps
 AddEventHandler('getMapDirectives', function(add)
     -- call the remote callback
@@ -50,7 +68,7 @@ AddEventHandler('getMapDirectives', function(add)
             end)
 
             if not s then
-                Citizen.Trace(e .. "\n")
+                Trace(e .. "\n")
             end
         end
         -- delete callback follows on the next line
@@ -243,7 +261,7 @@ function spawnPlayer(spawnIdx, cb)
 
         -- validate the index
         if not spawn then
-            Citizen.Trace("tried to spawn at an invalid spawn index\n")
+            Trace("tried to spawn at an invalid spawn index\n")
 
             spawnLock = false
 
@@ -269,7 +287,7 @@ function spawnPlayer(spawnIdx, cb)
 
             -- release the player model
             SetModelAsNoLongerNeeded(spawn.model)
-            
+
             -- RDR3 player model bits
             if N_0x283978a15512b2fe then
 				N_0x283978a15512b2fe(PlayerPedId(), true)
@@ -289,8 +307,13 @@ function spawnPlayer(spawnIdx, cb)
 
         -- gamelogic-style cleanup stuff
         ClearPedTasksImmediately(ped)
-        --SetEntityHealth(ped, 300) -- TODO: allow configuration of this?
-        RemoveAllPedWeapons(ped) -- TODO: make configurable (V behavior?)
+        if healthOverride then
+            SetEntityHealth(ped, healthOverride)
+        end
+
+        if removeWeapons then
+            RemoveAllPedWeapons(ped)
+        end
         ClearPlayerWantedLevel(PlayerId())
 
         local time = GetGameTimer()

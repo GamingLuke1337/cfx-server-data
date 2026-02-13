@@ -1,6 +1,4 @@
-RegisterNetEvent('rlUpdateNames')
-
-AddEventHandler('rlUpdateNames', function()
+RegisterNetEvent('rlUpdateNames', function()
     local names = {}
 
     for i = 0, 31 do
